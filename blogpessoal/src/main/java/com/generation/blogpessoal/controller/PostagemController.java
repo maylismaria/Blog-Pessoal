@@ -29,8 +29,6 @@ import jakarta.validation.Valid;
 @CrossOrigin(origins = "*" , allowedHeaders = "*")
 public class PostagemController {
 
-	
-
 	@Autowired
 	private PostagemRepository postagemRepository;
 	
@@ -41,7 +39,6 @@ public class PostagemController {
 	@GetMapping 
 	public ResponseEntity<List<Postagem>> getAll(){
 		return ResponseEntity.ok(postagemRepository.findAll());
-		
 	}
 		
 	@GetMapping("/{id}")    
@@ -63,7 +60,6 @@ public class PostagemController {
 				.body(postagemRepository.save(postagem));
 		
 		throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tema não existe!!", null);
-		
 	}
 	
 	@PutMapping 
@@ -78,20 +74,16 @@ public class PostagemController {
 				     .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 		
 		throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tema não existe!!", null);
-
 	}
-	
+		
 	return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 }
-	
-	
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/{id}")
 	public void delete (@PathVariable Long id) {
 		
 		Optional<Postagem> postagem = postagemRepository.findById(id);
 
-		
 		if (postagem.isEmpty())
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		
